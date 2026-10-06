@@ -173,12 +173,6 @@ is converted into a DCT representation with the same dimensionality:
 
 The transformation is invertible, allowing generated coefficients to be converted back into RGB images using the inverse DCT.
 
-
-<p align="center">
-  <img src="assets/training_dct_magnitudes.png" width="78%" alt="Log-DCT magnitudes of training images">
-</p>
-<p align="center"><em>Figure 2. Per-image log-DCT magnitude maps from real training frames. Most energy is concentrated in the low-frequency region, while weaker high-frequency components remain important for image detail.</em></p>
-
 ---
 
 # 7. Spectral Normalization and SNR Balancing
@@ -331,7 +325,7 @@ The frequency model supports warm-starting and fine-tuning from a previous exper
 <p align="center">
   <img src="assets/validation_curve.png" width="70%" alt="Validation curves for frequency and RGB models">
 </p>
-<p align="center"><em>Figure 3. Validation-score trajectories observed during training for the frequency-domain model and the RGB baseline.</em></p>
+<p align="center"><em>Figure 2. Validation-score trajectories observed during training for the frequency-domain model and the RGB baseline.</em></p>
 
 ---
 
@@ -436,7 +430,7 @@ The completed experiment used 1,000 generated samples for the main metric compar
   <img src="assets/frequency_ddpm_samples.png" width="48%" alt="Frequency-domain DDPM generated samples">
   <img src="assets/rgb_ddpm_samples.png" width="48%" alt="RGB DDPM generated samples">
 </p>
-<p align="center"><em>Figure 4. Generated faces from the frequency-domain DDPM (left) and RGB DDPM baseline (right). The RGB baseline is visually sharper and more coherent, while the frequency-domain model is evaluated primarily for its spectral behavior.</em></p>
+<p align="center"><em>Figure 3. Generated faces from the frequency-domain DDPM (left) and RGB DDPM baseline (right). The RGB baseline is visually sharper and more coherent, while the frequency-domain model is evaluated primarily for its spectral behavior.</em></p>
 
 ---
 
@@ -491,19 +485,19 @@ This suggests that directly modeling DCT coefficients improves the reproduction 
 
 
 <p align="center">
-  <img src="assets/broad_band_spectral_energy.png" width="68%" alt="Broad-band spectral energy distribution">
+  <img src="assets/radial_frequency_agreement.png" width="96%" alt="Radial-frequency agreement with held-out real faces">
 </p>
-<p align="center"><em>Figure 5. Broad-band spectral-energy comparison between real images, the frequency-domain DDPM, the RGB baseline, and control/reference distributions.</em></p>
+<p align="center"><em>Figure 4. Radial-frequency agreement with held-out real faces. The frequency-domain DDPM achieves a lower radial-profile deviation from real data than the RGB DDPM baseline, indicating improved agreement with the real spectral decay.</em></p>
 
 <p align="center">
-  <img src="assets/spectral_heatmap_comparison_1.png" width="96%" alt="Mean spectral heatmap comparison">
+  <img src="assets/frequency_band_energy_ratio.png" width="72%" alt="Frequency-band energy ratio to real data">
 </p>
-<p align="center"><em>Figure 6. Mean log-DCT spectrum comparison across real images and the different generated/reference distributions.</em></p>
+<p align="center"><em>Figure 5. Frequency-band energy ratio relative to real images. A ratio of 1 indicates perfect agreement, values below 1 indicate missing spectral energy, and values above 1 indicate excess energy. The frequency-domain DDPM shows reduced spectral imbalance compared with the RGB baseline across several frequency bands.</em></p>
 
 <p align="center">
-  <img src="assets/radial_frequency_profile.png" width="68%" alt="Radial frequency profile comparison">
+  <img src="assets/forensic_detectability.png" width="72%" alt="Forensic detectability comparison">
 </p>
-<p align="center"><em>Figure 7. Radial frequency profiles. The frequency-domain model more closely tracks the real-data spectral profile across several frequency regions.</em></p>
+<p align="center"><em>Figure 6. Forensic detectability of generated images using DCT- and residual-FFT-based probes. ROC-AUC values closer to 0.5 indicate greater similarity to real images. The frequency-domain DDPM is consistently harder to distinguish from real data than the RGB DDPM baseline, both before and after JPEG compression and resizing.</em></p>
 
 ---
 
@@ -606,7 +600,7 @@ The improved spectral performance of the frequency DDPM therefore cannot be expl
 <p align="center">
   <img src="assets/gaussian_dct_control.png" width="76%" alt="Independent Gaussian DCT control samples">
 </p>
-<p align="center"><em>Figure 8. Samples from the independent Gaussian-DCT control. Although marginal spectral statistics can be matched, the reconstructed images are not semantically coherent.</em></p>
+<p align="center"><em>Figure 7. Samples from the independent Gaussian-DCT control. Although marginal spectral statistics can be matched, the reconstructed images are not semantically coherent.</em></p>
 
 ---
 
@@ -637,7 +631,7 @@ On the hardware used for this experiment, DDIM-200 achieved approximately a **5.
   <img src="assets/ddim_100_samples.png" width="47%" alt="DDIM 100-step samples">
   <img src="assets/ddpm_1000_samples.png" width="47%" alt="Full DDPM 1000-step samples">
 </p>
-<p align="center"><em>Figure 9. DDIM with 100 steps (left) compared with full 1000-step DDPM sampling (right). Together with the quantitative table above, these examples illustrate the speed-quality trade-off.</em></p>
+<p align="center"><em>Figure 8. DDIM with 100 steps (left) compared with full 1000-step DDPM sampling (right). Together with the quantitative table above, these examples illustrate the speed-quality trade-off.</em></p>
 
 ---
 
