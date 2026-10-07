@@ -1,4 +1,4 @@
-# Frequency-Fourier-Diffusion-Model-for-Deepfake-detection
+# Frequency-DDM-Synthesizing-Spectral-Fingerprints-for-Deepfake-Analysis
 
 # 1. General Idea
 
